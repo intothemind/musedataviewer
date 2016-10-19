@@ -10,7 +10,7 @@ var done = false;
 
 
 var views = [];
-var viewIndex = 0;
+var viewIndex = 1;
 
 
 var data = {
@@ -35,7 +35,8 @@ var maxN = 100;
 
 
 function setup() {
-	createCanvas(1200, 800);
+	var can = createCanvas(968, 800);
+	can.parent("chart");
 
 	//data connection to muse with sampling rate of muse
 	if (dummy) {
@@ -72,9 +73,9 @@ function setup() {
 
 	muse.start();
 
-
+	var rawfftview = rawFFTView(data,'Raw FFTs for Each Channel','FFT stands for Fast Fourier Transform. This computes the power spectral density of each frequency on each channel. Basically, it shows which frequencies make up a signal, and  “how much” of each frequency is present. These values are the basis for many of the subsequent DSP values in Muse Elements. Each path contains 129 decimal values with a range of roughly -40.0 to 20.0. Each array represents FFT coefficients (expressed as Power Spectral Density) for each channel, for a frequency range from 0hz-110Hz divided into 129 bins. We use a Hamming window of 256 samples(at 220Hz), then for the next FFT we slide the window 22 samples over(1/10th of a second). This gives a 90% overlap from one window to the next. These values are emitted at 10Hz.');
 	views.push(rawEEGView(data,'Raw EEG','This is the raw EEG data for each channel on the headband as measured in microvolts.'));
-	views.push(rawFFTView(data,'Raw FFTs for Each Channel','FFT stands for Fast Fourier Transform. This computes the power spectral density of each frequency on each channel. Basically, it shows which frequencies make up a signal, and  “how much” of each frequency is present. These values are the basis for many of the subsequent DSP values in Muse Elements. Each path contains 129 decimal values with a range of roughly -40.0 to 20.0. Each array represents FFT coefficients (expressed as Power Spectral Density) for each channel, for a frequency range from 0hz-110Hz divided into 129 bins. We use a Hamming window of 256 samples(at 220Hz), then for the next FFT we slide the window 22 samples over(1/10th of a second). This gives a 90% overlap from one window to the next. These values are emitted at 10Hz.'));
+	views.push(rawfftview);
 
 	
 

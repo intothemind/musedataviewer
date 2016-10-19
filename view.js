@@ -4,10 +4,10 @@ function view(model, title, description){
 	var title = title;
 	var description = description;
 	var padding = {
-		left: 100,
-		top: 100,
-		right: 100,
-		bottom: 100,
+		left: 10,
+		top: 0,
+		right: 10,
+		bottom: 0,
 	};
 
 	var h1 = 42;
@@ -30,10 +30,12 @@ function view(model, title, description){
 	}
 
 	my.renderCommon = function(){
-		textSize(h1);
-		text(title, padding.left,padding.top);
-		textSize(h2);
-		text(description,padding.left,padding.top+gap);
+		//textSize(h1);
+		//text(title, padding.left,padding.top);
+		//textSize(h2);
+		//text(description,padding.left,padding.top+gap);
+		select('#title').html(title);
+		select('#description').html(description);
 	}
 
 	my.getPadding = function(){
