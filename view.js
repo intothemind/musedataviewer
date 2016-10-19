@@ -3,6 +3,17 @@ function view(model, title, description){
 	var model = model;
 	var title = title;
 	var description = description;
+	var padding = {
+		left: 100,
+		top: 100,
+		right: 100,
+		bottom: 100,
+	};
+
+	var h1 = 42;
+	var h2 = 18;
+
+	var gap = 50;
 
 	var my = {};
 
@@ -19,8 +30,14 @@ function view(model, title, description){
 	}
 
 	my.renderCommon = function(){
-		text(title, 100,100);
-		text(description,100,200);
+		textSize(h1);
+		text(title, padding.left,padding.top);
+		textSize(h2);
+		text(description,padding.left,padding.top+gap);
+	}
+
+	my.getPadding = function(){
+		return padding;
 	}
 
 	return my;
