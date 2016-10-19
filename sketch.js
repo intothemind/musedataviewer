@@ -10,6 +10,7 @@ var done = false;
 
 
 var views = [];
+var viewIndex = 0;
 
 
 function setup() {
@@ -31,9 +32,11 @@ function setup() {
 	//muse.listenTo('/muse/elements/theta_relative');
 
 
-
 	muse.start();
 
+
+	views.push(rawEEGView(muse,'Raw EEG','this is the description'));
+	views.push(rawFFTView(muse,'Raw FFT','this is the other description'));
 
 	
 
@@ -52,6 +55,9 @@ function draw() {
 	}
 
 
+	views[viewIndex].render();
+
+
 	//var alph = muse.get('/muse/elements/alpha_relative');
 	//var beta = muse.get('/muse/elements/beta_relative');
 	//var theta = muse.get('/muse/elements/theta_relative');
@@ -60,6 +66,20 @@ function draw() {
 	//console.log('beta',beta.mean);
 	//console.log('theta',theta.mean);
 
+}
+
+function keyTyped(){
+	if(key == 'q'){
+		viewIndex = constrain(viewIndex-1,0,views.length-1);
+		console.log('viewIndex: ' ,viewIndex,views.length);
+	}
+	else if(key == 'w'){
+		viewIndex = constrain(viewIndex+1,0,views.length-1);
+		console.log('viewIndex: ' ,viewIndex,views.length);
+	}
+
+	
+	
 }
 
 
