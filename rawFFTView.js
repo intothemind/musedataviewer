@@ -31,11 +31,15 @@ function rawFFTView(model, title, description) {
 
 		my.renderCommon();
 
-		var barData = data.rawFFT.leftEar;
+		//var barData = data.rawFFT.leftEar;
+		var barData = [data.rawFFT.leftEar,data.rawFFT.leftFront,data.rawFFT.rightFront,data.rawFFT.rightEar];
 		//console.log(barData);
 		var innerWidth = width - padding.left - padding.right;
-		var innerHeight = 200;
+		var innerHeight = 100;
 		var gap = 10;
+		var colors = data.rawFFT.leftEar.map(function(d,i){
+			return getColor(i);
+		});
 
 
 
@@ -43,21 +47,28 @@ function rawFFTView(model, title, description) {
 		strokeWeight(4);
 		push();
 		translate(padding.left, padding.top);
-		barData.forEach(function(d, i) {
+		barData.forEach(function(d,i){
+			push();
+			translate(0,i*(innerHeight+gap));
+			fftBarChart(barData[i],dBDomain,innerWidth,innerHeight,colors);
+			pop();
+		});
+		
+		/*barData.forEach(function(d, i) {
 			var x = map(i, 0, barData.length, 0, innerWidth);
 			var y = map(d, dBDomain[0], dBDomain[1], innerHeight, 0);
 			var col = getColor(i);
 			stroke(col);
 			line(x, innerHeight, x, y);
-		});
+		});*/
 
 		var colWidth = 100;
 		var r = 15;
 		var txtSze = 16;
 		textSize(txtSze);
-		translate(0,innerHeight + 60);
+		translate(0,barData.length*(innerHeight+gap) + 60);
 		frequencies.forEach(function(f,i){
-			console.log(f,i);
+			//console.log(f,i);
 			push();
 			translate(i*colWidth,0);
 			noStroke();
@@ -108,6 +119,7 @@ function rawFFTView(model, title, description) {
 
 	return my;
 }
+
 
 
 /**
