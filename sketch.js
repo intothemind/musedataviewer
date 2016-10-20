@@ -88,7 +88,8 @@ var data = {
 			rightEar: []
 		}
 	},
-	horseshoe: {}
+	horseshoe: {},
+	touching_forehead: 0
 };
 
 var maxN = 500;
@@ -125,6 +126,7 @@ function setup() {
 	muse.listenTo('/muse/elements/beta_relative');
 	muse.listenTo('/muse/elements/gamma_relative');
 	muse.listenTo('/muse/elements/horseshoe');
+	muse.listenTo('/muse/elements/touching_forehead');
 
 
 
@@ -202,6 +204,9 @@ function updateData() {
 	var beta_relative = muse.get('/muse/elements/beta_relative');
 	var gamma_relative = muse.get('/muse/elements/gamma_relative');
 	var horseshoe = muse.get('/muse/elements/horseshoe');
+	var touching_forehead = muse.get('/muse/elements/touching_forehead');
+	
+
 
 	//console.log(alpha_absolute);
 
@@ -243,7 +248,12 @@ function updateData() {
 
 
 	//horseshoe
-	console.log(horseshoe);
+	//console.log(horseshoe);
+	data.horseshoe = horseshoe;
+
+	//touching forehead
+	console.log(touching_forehead);
+	data.touching_forehead = touching_forehead.value;
 
 
 	//console.log(alpha_absolute);
