@@ -29,6 +29,7 @@ var data = {
 			leftEar: [],
 			leftFront: [],
 			rightFront: [],
+			rightEar: []
 		},
 		theta: {
 			leftEar: [],
@@ -55,7 +56,38 @@ var data = {
 			rightEar: []
 		}
 	},
-	relativeBand: {},
+	relativeBand: {
+		delta: {
+			leftEar: [],
+			leftFront: [],
+			rightFront: [],
+			rightEar: []
+		},
+		theta: {
+			leftEar: [],
+			leftFront: [],
+			rightFront: [],
+			rightEar: []
+		},
+		alpha: {
+			leftEar: [],
+			leftFront: [],
+			rightFront: [],
+			rightEar: []
+		},
+		beta: {
+			leftEar: [],
+			leftFront: [],
+			rightFront: [],
+			rightEar: []
+		},
+		gamma: {
+			leftEar: [],
+			leftFront: [],
+			rightFront: [],
+			rightEar: []
+		}
+	},
 	horseshoe: {}
 };
 
@@ -105,6 +137,7 @@ function setup() {
 	views.push(rawEEGView(data, 'Raw EEG', 'This is the raw EEG data for each channel on the headband as measured in microvolts.'));
 	views.push(rawfftview);
 	views.push(absoluteBandView(data, 'Absolute Band Powers', 'The absolute band power for a given frequency range (for instance, alpha, i.e. 9-13Hz) is the logarithm of the sum of the Power Spectral Density of the EEG data over that frequency range. They are provided for each of the four to six channels/electrode sites on Muse. Since it is a logarithm, some of the values will be negative (i.e. when the absolute power is less than 1) They are given on a log scale, units are Bels.'));
+	views.push(relativeBandView(data, 'Relative Band Powers', 'The relative band powers are calculated by dividing the absolute linear-scale power in one band over the sum of the absolute linear-scale powers in all bands. The linear-scale band power can be calculated from the log-scale band power thusly: linear-scale band power = 10^ (log-scale band power). Therefore, the relative band powers can be calculated as percentages of linear-scale band powers in each band. The resulting value is between 0 and 1. However, the value will never be 0 or 1. These values are emitted at 10Hz.'));
 
 
 
@@ -191,6 +224,18 @@ function updateData() {
 	data.absoluteBand.gamma.leftFront.push(gamma_absolute.leftFront);
 
 	shiftArrays([data.absoluteBand.delta.leftFront,data.absoluteBand.theta.leftFront,data.absoluteBand.alpha.leftFront,data.absoluteBand.beta.leftFront,data.absoluteBand.gamma.leftFront],maxN);
+
+
+	//relative band powers
+	data.relativeBand.delta.leftFront.push(delta_relative.leftFront);
+	data.relativeBand.theta.leftFront.push(theta_relative.leftFront);
+	data.relativeBand.alpha.leftFront.push(alpha_relative.leftFront);
+	data.relativeBand.beta.leftFront.push(beta_relative.leftFront);
+	data.relativeBand.gamma.leftFront.push(gamma_relative.leftFront);
+
+	shiftArrays([data.relativeBand.delta.leftFront,data.relativeBand.theta.leftFront,data.relativeBand.alpha.leftFront,data.relativeBand.beta.leftFront,data.relativeBand.gamma.leftFront],maxN);
+
+
 
 	//console.log(alpha_absolute);
 
