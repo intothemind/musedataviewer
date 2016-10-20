@@ -53,14 +53,6 @@ function rawFFTView(model, title, description) {
 			fftBarChart(barData[i],dBDomain,innerWidth,innerHeight,colors);
 			pop();
 		});
-		
-		/*barData.forEach(function(d, i) {
-			var x = map(i, 0, barData.length, 0, innerWidth);
-			var y = map(d, dBDomain[0], dBDomain[1], innerHeight, 0);
-			var col = getColor(i);
-			stroke(col);
-			line(x, innerHeight, x, y);
-		});*/
 
 		var colWidth = 100;
 		var r = 15;
