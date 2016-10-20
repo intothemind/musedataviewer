@@ -4,7 +4,7 @@ function relativeBandView(model, title, description) {
 
 	var padding = my.getPadding();
 	
-	var domain = [0,1];
+	var domain = [0,0.7];
 
 	//data.absoluteBand.delta.leftFront
 
@@ -22,8 +22,8 @@ function relativeBandView(model, title, description) {
 
 		var areaData = [model.relativeBand.delta.leftFront,data.relativeBand.theta.leftFront,data.relativeBand.alpha.leftFront,data.relativeBand.beta.leftFront,data.relativeBand.gamma.leftFront];
 		var innerWidth = width - padding.left - padding.right;
-		var innerHeight = 100;
-		var gap = 0;
+		var innerHeight = 90;
+		var gap = 10;
 
 
 		strokeWeight(1);
@@ -33,6 +33,9 @@ function relativeBandView(model, title, description) {
 		areaData.forEach(function(d,i){
 			push();
 			translate(0,i*(innerHeight+gap));
+			fill(250);
+			noStroke();
+			rect(0, 0, innerWidth, innerHeight);
 			fill(colors[i]);
 			areaChart(areaData[i],domain,innerWidth,innerHeight);
 			pop();

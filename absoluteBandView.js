@@ -22,8 +22,8 @@ function absoluteBandView(model, title, description) {
 
 		var areaData = [model.absoluteBand.delta.leftFront,data.absoluteBand.theta.leftFront,data.absoluteBand.alpha.leftFront,data.absoluteBand.beta.leftFront,data.absoluteBand.gamma.leftFront];
 		var innerWidth = width - padding.left - padding.right;
-		var innerHeight = 100;
-		var gap = 0;
+		var innerHeight = 90;
+		var gap = 10;
 
 
 		strokeWeight(1);
