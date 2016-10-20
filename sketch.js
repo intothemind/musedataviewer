@@ -2,7 +2,7 @@ var muse;
 
 
 //initialize museData
-var dummy = true;
+var dummy = false;
 
 var done = false;
 
@@ -252,7 +252,7 @@ function updateData() {
 	data.horseshoe = horseshoe;
 
 	//touching forehead
-	console.log(touching_forehead);
+	//console.log(touching_forehead);
 	data.touching_forehead = touching_forehead.value;
 
 

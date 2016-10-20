@@ -7,7 +7,9 @@ function horseshoeView(model, title, description) {
 	var colors = {
 		'1': 'green',
 		'2': 'yellow',
-		'3': 'red'
+		'3': 'red',
+		'4': 'red',
+		'5': 'red'
 	};
 
 	var foreHeadColors = {
@@ -36,6 +38,8 @@ function horseshoeView(model, title, description) {
 		select('#rightEar').style('fill',colors[model.horseshoe.rightEar]);
 
 		select('#front').style('fill',foreHeadColors[model.touching_forehead]);
+
+		//console.log(model.horseshoe);
 
 
 
