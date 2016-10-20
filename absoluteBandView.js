@@ -4,10 +4,14 @@ function absoluteBandView(model, title, description) {
 
 	var padding = my.getPadding();
 	
-	var uVDomain = [1682.815/3,2*1682.815/3];
+	var BDomain = [-1,1];
 
+	//data.absoluteBand.delta.leftFront
+
+
+	var frequencies = ['Delta','Theta','Alpha','Beta','Gamma'];
+	var colors = ['#225378', '#1695A3', '#ACF0F2', '#F3FFE2', '#EB7F00'];
 	
-
 	my.render = function() {
 		//console.log('rawEEGView.render');
 		//console.log(my);
@@ -16,6 +20,44 @@ function absoluteBandView(model, title, description) {
 
 		my.renderCommon();
 
+		var areaData = [model.absoluteBand.delta.leftFront,data.absoluteBand.theta.leftFront,data.absoluteBand.alpha.leftFront,data.absoluteBand.beta.leftFront,data.absoluteBand.gamma.leftFront];
+		var innerWidth = width - padding.left - padding.right;
+		var innerHeight = 100;
+		var gap = 0;
+
+
+		strokeWeight(1);
+		noStroke();
+		push();
+		translate(padding.left, padding.top);
+		areaData.forEach(function(d,i){
+			push();
+			translate(0,i*(innerHeight+gap));
+			fill(colors[i]);
+			areaChart(areaData[i],BDomain,innerWidth,innerHeight);
+			pop();
+		});
+		
+
+
+		//legend
+		var colWidth = 100;
+		var r = 15;
+		var txtSze = 16;
+		textSize(txtSze);
+		translate(0,areaData.length*(innerHeight+gap) + 60);
+		frequencies.forEach(function(f,i){
+			//console.log(f,i);
+			push();
+			translate(i*colWidth,0);
+			noStroke();
+			fill(colors[i]);
+			ellipse(0,0,r,r);
+			fill(0);
+			text(f,r,6);
+			pop();
+		});
+		pop();
 /*
 		var lineData = [model.rawEEG.leftEar, model.rawEEG.leftFront, model.rawEEG.rightFront, model.rawEEG.rightEar];
 		var innerWidth = width - padding.left - padding.right;

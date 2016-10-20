@@ -173,7 +173,7 @@ function updateData() {
 	data.rawEEG.rightFront.push(eeg.rightFront);
 	data.rawEEG.rightEar.push(eeg.rightEar);
 
-	shifArrays([data.rawEEG.leftEar, data.rawEEG.leftFront, data.rawEEG.rightFront, data.rawEEG.rightEar], maxN);
+	shiftArrays([data.rawEEG.leftEar, data.rawEEG.leftFront, data.rawEEG.rightFront, data.rawEEG.rightEar], maxN);
 
 
 	//raw FFT
@@ -190,8 +190,9 @@ function updateData() {
 	data.absoluteBand.beta.leftFront.push(beta_absolute.leftFront);
 	data.absoluteBand.gamma.leftFront.push(gamma_absolute.leftFront);
 
-	shifArrays([data.absoluteBand.delta.leftFront,data.absoluteBand.theta.leftFront,data.absoluteBand.alpha.leftFront,data.absoluteBand.beta.leftFront,data.absoluteBand.gamma.leftFront]);
+	shiftArrays([data.absoluteBand.delta.leftFront,data.absoluteBand.theta.leftFront,data.absoluteBand.alpha.leftFront,data.absoluteBand.beta.leftFront,data.absoluteBand.gamma.leftFront],maxN);
 
+	//console.log(alpha_absolute);
 
 	//console.log('data.rawEEG');
 	//console.log(data.rawEEG.leftEar);
@@ -223,7 +224,7 @@ function keyTyped() {
 }
 
 
-function shifArrays(arrOfArrays, n) {
+function shiftArrays(arrOfArrays, n) {
 	arrOfArrays.forEach(function(arr) {
 		if (arr.length > n) {
 			arr.shift();
