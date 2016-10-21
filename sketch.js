@@ -10,6 +10,8 @@ var done = false;
 var views = [];
 var viewIndex = 0;
 
+var canvasHeight = 600;
+
 
 var data = {
 	rawEEG: {
@@ -90,14 +92,18 @@ var data = {
 	},
 	horseshoe: {},
 	touching_forehead: 0,
-	blink: 0
+	blink: 0,
+	jaw: 0
 };
 
 var maxN = 500;
 
 
 function setup() {
-	var can = createCanvas(968, 600);
+
+
+	var parentContainer = select('#chart');
+	var can = createCanvas(parentContainer.width, canvasHeight);
 	can.parent("chart");
 
 	//data connection to muse with sampling rate of muse
@@ -128,7 +134,8 @@ function setup() {
 	muse.listenTo('/muse/elements/gamma_relative');
 	muse.listenTo('/muse/elements/horseshoe');
 	muse.listenTo('/muse/elements/touching_forehead');
-	 muse.listenTo('/muse/elements/blink');
+	muse.listenTo('/muse/elements/blink');
+	muse.listenTo('/muse/elements/jaw_clench');
 
 
 
@@ -142,12 +149,9 @@ function setup() {
 	views.push(rawfftview);
 	views.push(absoluteBandView(data, 'Absolute Band Powers', 'The absolute band power for a given frequency range (for instance, alpha, i.e. 9-13Hz) is the logarithm of the sum of the Power Spectral Density of the EEG data over that frequency range. They are provided for each of the four to six channels/electrode sites on Muse. Since it is a logarithm, some of the values will be negative (i.e. when the absolute power is less than 1) They are given on a log scale, units are Bels.'));
 	views.push(relativeBandView(data, 'Relative Band Powers', 'The relative band powers are calculated by dividing the absolute linear-scale power in one band over the sum of the absolute linear-scale powers in all bands. The linear-scale band power can be calculated from the log-scale band power thusly: linear-scale band power = 10^ (log-scale band power). Therefore, the relative band powers can be calculated as percentages of linear-scale band powers in each band. The resulting value is between 0 and 1. However, the value will never be 0 or 1. These values are emitted at 10Hz.'));
-views.push(horseshoeView(data, 'Headband Status / Horseshoe', 'Status indicator for each channel (think of the Muse status indicator that looks like a horseshoe). 1 = good, 2 = ok, >=3 bad'));
-views.push(blinkView(data, 'Muscle Movement / Blinks', 'These are emitted at 10Hz. A boolean value, 1 represents a blink was detected.'));
-
-
-
-
+	views.push(horseshoeView(data, 'Headband Status / Horseshoe', 'Status indicator for each channel (think of the Muse status indicator that looks like a horseshoe). 1 = good, 2 = ok, >=3 bad'));
+	views.push(blinkView(data, 'Muscle Movement / Blinks', 'These are emitted at 10Hz. A boolean value, 1 represents a blink was detected.'));
+	views.push(jawView(data, 'Muscle Movement / Jaw Clenches', 'A boolean value, 1 represents a jaw clench was detected.'));
 
 
 	//set the font
@@ -157,11 +161,12 @@ views.push(blinkView(data, 'Muscle Movement / Blinks', 'These are emitted at 10H
 	select('#horseshoe').hide();
 	select('#eye_open').hide();
 	select('#eye_closed').hide();
+	select('#jaw_clench').hide();
+	select('#smile').hide();
 }
 
 function draw() {
 
-	
 
 
 	//wait for a few seconds so that the data can come trough
@@ -213,7 +218,8 @@ function updateData() {
 	var horseshoe = muse.get('/muse/elements/horseshoe');
 	var touching_forehead = muse.get('/muse/elements/touching_forehead');
 	var blink = muse.get('/muse/elements/blink');
-	
+	var jaw = muse.get('/muse/elements/jaw_clench');
+
 
 
 	//console.log(alpha_absolute);
@@ -242,7 +248,7 @@ function updateData() {
 	data.absoluteBand.beta.leftFront.push(beta_absolute.leftFront);
 	data.absoluteBand.gamma.leftFront.push(gamma_absolute.leftFront);
 
-	shiftArrays([data.absoluteBand.delta.leftFront,data.absoluteBand.theta.leftFront,data.absoluteBand.alpha.leftFront,data.absoluteBand.beta.leftFront,data.absoluteBand.gamma.leftFront],maxN);
+	shiftArrays([data.absoluteBand.delta.leftFront, data.absoluteBand.theta.leftFront, data.absoluteBand.alpha.leftFront, data.absoluteBand.beta.leftFront, data.absoluteBand.gamma.leftFront], maxN);
 
 
 	//relative band powers
@@ -252,7 +258,7 @@ function updateData() {
 	data.relativeBand.beta.leftFront.push(beta_relative.leftFront);
 	data.relativeBand.gamma.leftFront.push(gamma_relative.leftFront);
 
-	shiftArrays([data.relativeBand.delta.leftFront,data.relativeBand.theta.leftFront,data.relativeBand.alpha.leftFront,data.relativeBand.beta.leftFront,data.relativeBand.gamma.leftFront],maxN);
+	shiftArrays([data.relativeBand.delta.leftFront, data.relativeBand.theta.leftFront, data.relativeBand.alpha.leftFront, data.relativeBand.beta.leftFront, data.relativeBand.gamma.leftFront], maxN);
 
 
 	//horseshoe
@@ -267,6 +273,10 @@ function updateData() {
 	//blink
 	//console.log(blink);
 	data.blink = blink.value;
+
+	//jaw clench
+	data.jaw = jaw.value;
+	//console.log(jaw);
 
 
 	//console.log(alpha_absolute);
@@ -298,25 +308,37 @@ function keyTyped() {
 
 
 	//show or hide horseshow
-	if(viewIndex == 4){
+	//ugly needs to be made better
+	if (viewIndex == 4) {
 		select('#horseshoe').show();
 		select('canvas').hide();
-	}
-	else if(viewIndex == 5){
+		select('#jaw_clench').hide();
+		select('#smile').hide();
+		select('#eye_closed').hide();
+		select('#eye_open').hide();
+	} else if (viewIndex == 5) {
 		select('#horseshoe').hide();
 		select('#eye_closed').hide();
 		select('#eye_open').show();
 		select('canvas').hide();
-	}
-	else{
+				select('#jaw_clench').hide();
+		select('#smile').hide();
+	}else if(viewIndex == 6){
 		select('#horseshoe').hide();
 		select('#eye_closed').hide();
 		select('#eye_open').hide();
+		select('canvas').hide();
+		select('#jaw_clench').hide();
+		select('#smile').show();
+	} 
+	else {
+		select('#horseshoe').hide();
+		select('#eye_closed').hide();
+		select('#eye_open').hide();
+		select('#jaw_clench').hide();
+		select('#smile').hide();
 		select('canvas').show();
 	}
-
-	
-
 
 
 
@@ -331,6 +353,14 @@ function shiftArrays(arrOfArrays, n) {
 	});
 }
 
+function windowResized() {
+	console.log('windowResized')
+	resizeCanvas(select('#chart').width, canvasHeight);
+	console.log('width', width, 'height', height);
+
+}
+
+
 
 
 //this needs to be part of a helper library together with sum and mean maybe median also
@@ -342,5 +372,4 @@ function mean(arr) {
 	});
 
 	return sum / arr.length;
-
 }
