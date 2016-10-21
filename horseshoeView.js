@@ -5,17 +5,19 @@ function horseshoeView(model, title, description) {
 	var padding = my.getPadding();
 	
 	var colors = {
-		'1': 'green',
-		'2': 'yellow',
-		'3': 'red',
-		'4': 'red',
-		'5': 'red'
+		'1': '#2AA876',
+		'2': '#FFD265',
+		'3': '#CE4D45',
+		'4': '#CE4D45',
+		'5': '#CE4D45'
 	};
 
 	var foreHeadColors = {
-		'0': 'white',
+		'0': '#eee',
 		'1': 'black'
 	};
+
+	var colors = [ '#0A7B83', '#2AA876', '#FFD265', '#F19C65', '#CE4D45'];
 
 	my.render = function() {
 		//console.log('rawEEGView.render');

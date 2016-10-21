@@ -10,7 +10,8 @@ function relativeBandView(model, title, description) {
 
 
 	var frequencies = ['Delta','Theta','Alpha','Beta','Gamma'];
-	var colors = ['#225378', '#1695A3', '#ACF0F2', '#F3FFE2', '#EB7F00'];
+	//var colors = ['#225378', '#1695A3', '#ACF0F2', '#F3FFE2', '#EB7F00'];
+	var colors = [ '#0A7B83', '#2AA876', '#FFD265', '#F19C65', '#CE4D45'];
 	
 	my.render = function() {
 		//console.log('rawEEGView.render');
@@ -33,11 +34,12 @@ function relativeBandView(model, title, description) {
 		areaData.forEach(function(d,i){
 			push();
 			translate(0,i*(innerHeight+gap));
-			fill(250);
-			noStroke();
-			rect(0, 0, innerWidth, innerHeight);
+			//fill(250);
+			//noStroke();
+			//rect(0, 0, innerWidth, innerHeight);
 			fill(colors[i]);
-			areaChart(areaData[i],domain,innerWidth,innerHeight);
+			stroke(colors[i]);
+			areaChart(areaData[i],domain,innerWidth,innerHeight,'');
 			pop();
 		});
 		
@@ -48,7 +50,7 @@ function relativeBandView(model, title, description) {
 		var r = 15;
 		var txtSze = 16;
 		textSize(txtSze);
-		translate(0,areaData.length*(innerHeight+gap) + 60);
+		translate(10,areaData.length*(innerHeight+gap) + 30);
 		frequencies.forEach(function(f,i){
 			//console.log(f,i);
 			push();

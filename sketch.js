@@ -2,7 +2,7 @@ var muse;
 
 
 //initialize museData
-var dummy = true;
+var dummy = false;
 
 var done = false;
 
@@ -96,7 +96,7 @@ var data = {
 	jaw: 0
 };
 
-var maxN = 500;
+var maxN = 300;
 var preloadImg = null;
 
  function preload(){

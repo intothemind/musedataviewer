@@ -21,14 +21,14 @@ function jawView(model, title, description) {
 			//we have a blink
 			select('#smile').hide();
 			select('#jaw_clench').show();
-			select('#jaw_clench').style('margin-top','100px');
-			select('#jaw_clench').style('margin-left','100px');
+			select('#jaw_clench').style('margin-top','0px');
+			select('#jaw_clench').style('margin-left','0px');
 		}
 		else{
 			select('#jaw_clench').hide();
 			select('#smile').show();
-			select('#smile').style('margin-top','100px');
-			select('#smile').style('margin-left','100px');
+			select('#smile').style('margin-top','0px');
+			select('#smile').style('margin-left','0px');
 			
 		}
 
