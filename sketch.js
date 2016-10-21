@@ -2,7 +2,7 @@ var muse;
 
 
 //initialize museData
-var dummy = false;
+var dummy = true;
 
 var done = false;
 
@@ -89,7 +89,8 @@ var data = {
 		}
 	},
 	horseshoe: {},
-	touching_forehead: 0
+	touching_forehead: 0,
+	blink: 0
 };
 
 var maxN = 500;
@@ -127,6 +128,7 @@ function setup() {
 	muse.listenTo('/muse/elements/gamma_relative');
 	muse.listenTo('/muse/elements/horseshoe');
 	muse.listenTo('/muse/elements/touching_forehead');
+	 muse.listenTo('/muse/elements/blink');
 
 
 
@@ -141,6 +143,9 @@ function setup() {
 	views.push(absoluteBandView(data, 'Absolute Band Powers', 'The absolute band power for a given frequency range (for instance, alpha, i.e. 9-13Hz) is the logarithm of the sum of the Power Spectral Density of the EEG data over that frequency range. They are provided for each of the four to six channels/electrode sites on Muse. Since it is a logarithm, some of the values will be negative (i.e. when the absolute power is less than 1) They are given on a log scale, units are Bels.'));
 	views.push(relativeBandView(data, 'Relative Band Powers', 'The relative band powers are calculated by dividing the absolute linear-scale power in one band over the sum of the absolute linear-scale powers in all bands. The linear-scale band power can be calculated from the log-scale band power thusly: linear-scale band power = 10^ (log-scale band power). Therefore, the relative band powers can be calculated as percentages of linear-scale band powers in each band. The resulting value is between 0 and 1. However, the value will never be 0 or 1. These values are emitted at 10Hz.'));
 views.push(horseshoeView(data, 'Headband Status / Horseshoe', 'Status indicator for each channel (think of the Muse status indicator that looks like a horseshoe). 1 = good, 2 = ok, >=3 bad'));
+views.push(blinkView(data, 'Muscle Movement / Blinks', 'These are emitted at 10Hz. A boolean value, 1 represents a blink was detected.'));
+
+
 
 
 
@@ -150,6 +155,8 @@ views.push(horseshoeView(data, 'Headband Status / Horseshoe', 'Status indicator 
 	frameRate(30);
 
 	select('#horseshoe').hide();
+	select('#eye_open').hide();
+	select('#eye_closed').hide();
 }
 
 function draw() {
@@ -205,6 +212,7 @@ function updateData() {
 	var gamma_relative = muse.get('/muse/elements/gamma_relative');
 	var horseshoe = muse.get('/muse/elements/horseshoe');
 	var touching_forehead = muse.get('/muse/elements/touching_forehead');
+	var blink = muse.get('/muse/elements/blink');
 	
 
 
@@ -256,6 +264,11 @@ function updateData() {
 	data.touching_forehead = touching_forehead.value;
 
 
+	//blink
+	//console.log(blink);
+	data.blink = blink.value;
+
+
 	//console.log(alpha_absolute);
 
 	//console.log('data.rawEEG');
@@ -289,10 +302,21 @@ function keyTyped() {
 		select('#horseshoe').show();
 		select('canvas').hide();
 	}
+	else if(viewIndex == 5){
+		select('#horseshoe').hide();
+		select('#eye_closed').hide();
+		select('#eye_open').show();
+		select('canvas').hide();
+	}
 	else{
 		select('#horseshoe').hide();
+		select('#eye_closed').hide();
+		select('#eye_open').hide();
 		select('canvas').show();
 	}
+
+	
+
 
 
 
