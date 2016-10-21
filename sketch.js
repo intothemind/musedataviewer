@@ -97,14 +97,25 @@ var data = {
 };
 
 var maxN = 500;
+var preloadImg = null;
+
+ function preload(){
+   
+    preloadImg = createImg('preloader.gif');
+   }
 
 
 function setup() {
 
+	
 
 	var parentContainer = select('#chart');
+	preloadImg.parent('chart');
+	preloadImg.position(0.5*parentContainer.width,0.5*canvasHeight);
 	var can = createCanvas(parentContainer.width, canvasHeight);
-	can.parent("chart");
+
+	can.parent('chart');
+
 
 	//data connection to muse with sampling rate of muse
 	if (dummy) {
@@ -170,13 +181,13 @@ function draw() {
 
 
 	//wait for a few seconds so that the data can come trough
-	if (frameCount < 30) {
-		background('red');
+	if (frameCount < 100) {
+		background('#EEE');
 		return;
 	}
 
-
-	background('grey');
+	preloadImg.hide();
+	background('#EEE');
 
 
 
