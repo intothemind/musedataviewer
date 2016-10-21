@@ -28,13 +28,13 @@ function rawEEGView(model, title, description) {
 		lineData.forEach(function(ld, i) {
 			push();
 			translate(0,i*(innerHeight+gap));
-			fill(250);
-			noStroke();
-			rect(0, 0, innerWidth, innerHeight);
+			//fill(250);
+			//noStroke();
+			//rect(0, 0, innerWidth, innerHeight);
 			noFill();
 			stroke(50);
-			strokeWeight(1.8);
-			lineChart(ld, uVDomain, innerWidth, innerHeight);
+			strokeWeight(2);
+			lineChart(ld, uVDomain, innerWidth, innerHeight,'uV');
 			pop();
 		});
 		

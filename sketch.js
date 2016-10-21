@@ -181,7 +181,7 @@ function draw() {
 
 
 	//wait for a few seconds so that the data can come trough
-	if (frameCount < 100) {
+	if (frameCount < 30) {
 		background('#EEE');
 		return;
 	}
