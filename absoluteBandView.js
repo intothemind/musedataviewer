@@ -35,7 +35,9 @@ function absoluteBandView(model, title, description) {
 			push();
 			translate(0,i*(innerHeight+gap));
 			fill(colors[i]);
-			areaChart(areaData[i],BDomain,innerWidth,innerHeight);
+			stroke(colors[i]);
+			strokeWeight(1);
+			areaChart(areaData[i],BDomain,innerWidth,innerHeight,'Bels (B)');
 			pop();
 		});
 		
@@ -46,7 +48,7 @@ function absoluteBandView(model, title, description) {
 		var r = 15;
 		var txtSze = 16;
 		textSize(txtSze);
-		translate(10,areaData.length*(innerHeight+gap) + 60);
+		translate(10,areaData.length*(innerHeight+gap) + 30);
 		frequencies.forEach(function(f,i){
 			//console.log(f,i);
 			push();
