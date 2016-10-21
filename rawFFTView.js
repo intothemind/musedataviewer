@@ -5,16 +5,22 @@ function rawFFTView(model, title, description) {
 
 	var dBDomain = [-40.0, 20.0];
 
-	var no_freq = 'no_freq';
+	var no_freq = 'Low';
 	var delta_absolute = 'Delta';
 	var theta_absolute = 'Theta';
 	var alpha_absolute = 'Alpha';
 	var beta_absolute = 'Beta';
 	var gamma_absolute = 'Gamma';
-	var high_freq = 'high_freq';
+	var high_freq = 'High Frequency';
 
 	var frequencies = [no_freq,delta_absolute,theta_absolute,alpha_absolute,beta_absolute,gamma_absolute,high_freq];
-	var colors = ['black', '#225378', '#1695A3', '#ACF0F2', '#F3FFE2', '#EB7F00','black'];
+	//var colors = ['black', '#225378', '#1695A3', '#ACF0F2', '#F3FFE2', '#EB7F00','black'];
+	//var colors = ['black', '#7F1637', '#047878', '#FFB733', '#F57336', '#C22121','black'];
+	//var colors = ['black', '#FF5B2B', '#B1221C', '#B1221C', '#8CC6D7', '#FFDA8C','black'];
+	//var colors = ['black', '#F15A5A', '#F0C419', '#4EBA6F', '#2D95BF', '#955BA5','black'];
+	//var colors = ['black', '#393A3D', '#DB0048', '#63A8A5', '#C8DBBF', '#E0FCEB','black'];
+	var colors = ['black', '#0A7B83', '#2AA876', '#FFD265', '#F19C65', '#CE4D45','black'];
+	
 	var colorLookup = [];
 
 	frequencies.forEach(function(f,i){
@@ -43,7 +49,7 @@ function rawFFTView(model, title, description) {
 
 
 
-		//TODO display all four raw ffts
+
 		strokeWeight(4);
 		push();
 		translate(padding.left, padding.top);
@@ -58,7 +64,7 @@ function rawFFTView(model, title, description) {
 		var r = 15;
 		var txtSze = 16;
 		textSize(txtSze);
-		translate(0,barData.length*(innerHeight+gap) + 60);
+		translate(10,barData.length*(innerHeight+gap) +30);
 		frequencies.forEach(function(f,i){
 			//console.log(f,i);
 			push();
