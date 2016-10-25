@@ -21,7 +21,8 @@ function relativeBandView(model, title, description) {
 
 		my.renderCommon();
 
-		var areaData = [model.relativeBand.delta.leftFront,data.relativeBand.theta.leftFront,data.relativeBand.alpha.leftFront,data.relativeBand.beta.leftFront,data.relativeBand.gamma.leftFront];
+		//var areaData = [model.relativeBand.delta.leftFront,data.relativeBand.theta.leftFront,data.relativeBand.alpha.leftFront,data.relativeBand.beta.leftFront,data.relativeBand.gamma.leftFront];
+		var areaData = [model.relativeBand.delta.mean,data.relativeBand.theta.mean,data.relativeBand.alpha.mean,data.relativeBand.beta.mean,data.relativeBand.gamma.mean];
 		var innerWidth = width - padding.left - padding.right;
 		var innerHeight = 90;
 		var gap = 10;

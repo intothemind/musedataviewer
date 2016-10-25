@@ -301,11 +301,11 @@ function updateData() {
 
 
 	//calculate absolute means
-	data.absoluteBand.delta.mean = (data.absoluteBand.delta.leftEar + data.absoluteBand.delta.leftFront + data.absoluteBand.delta.rightFront + data.absoluteBand.delta.rightEar)/4;
-	data.absoluteBand.theta.mean = (data.absoluteBand.theta.leftEar + data.absoluteBand.theta.leftFront + data.absoluteBand.theta.rightFront + data.absoluteBand.theta.rightEar)/4;
-	data.absoluteBand.alpha.mean = (data.absoluteBand.alpha.leftEar + data.absoluteBand.alpha.leftFront + data.absoluteBand.alpha.rightFront + data.absoluteBand.alpha.rightEar)/4;
-	data.absoluteBand.beta.mean = (data.absoluteBand.beta.leftEar + data.absoluteBand.beta.leftFront + data.absoluteBand.beta.rightFront + data.absoluteBand.beta.rightEar)/4;
-	data.absoluteBand.gamma.mean = (data.absoluteBand.gamma.leftEar + data.absoluteBand.gamma.leftFront + data.absoluteBand.gamma.rightFront + data.absoluteBand.gamma.rightEar)/4;
+	data.absoluteBand.delta.mean.push((delta_absolute.leftEar + delta_absolute.leftFront + delta_absolute.rightFront + delta_absolute.rightEar)/4);
+	data.absoluteBand.theta.mean.push((theta_absolute.leftEar + theta_absolute.leftFront + theta_absolute.rightFront + theta_absolute.rightEar)/4);
+	data.absoluteBand.alpha.mean.push((alpha_absolute.leftEar + alpha_absolute.leftFront + alpha_absolute.rightFront + alpha_absolute.rightEar)/4);
+	data.absoluteBand.beta.mean.push((beta_absolute.leftEar + beta_absolute.leftFront + beta_absolute.rightFront + beta_absolute.rightEar)/4);
+	data.absoluteBand.gamma.mean.push((gamma_absolute.leftEar + gamma_absolute.leftFront + gamma_absolute.rightFront + gamma_absolute.rightEar)/4);
 
 	shiftArrays([data.absoluteBand.delta.mean, data.absoluteBand.theta.mean, data.absoluteBand.alpha.mean, data.absoluteBand.beta.mean, data.absoluteBand.gamma.mean], maxN);
 
@@ -353,11 +353,11 @@ function updateData() {
 
 
 	//calculate relative means
-	data.relativeBand.delta.mean = (data.relativeBand.delta.leftEar + data.relativeBand.delta.leftFront + data.relativeBand.delta.rightFront + data.relativeBand.delta.rightEar)/4;
-	data.relativeBand.theta.mean = (data.relativeBand.theta.leftEar + data.relativeBand.theta.leftFront + data.relativeBand.theta.rightFront + data.relativeBand.theta.rightEar)/4;
-	data.relativeBand.alpha.mean = (data.relativeBand.alpha.leftEar + data.relativeBand.alpha.leftFront + data.relativeBand.alpha.rightFront + data.relativeBand.alpha.rightEar)/4;
-	data.relativeBand.beta.mean = (data.relativeBand.beta.leftEar + data.relativeBand.beta.leftFront + data.relativeBand.beta.rightFront + data.relativeBand.beta.rightEar)/4;
-	data.relativeBand.gamma.mean = (data.relativeBand.gamma.leftEar + data.relativeBand.gamma.leftFront + data.relativeBand.gamma.rightFront + data.relativeBand.gamma.rightEar)/4;
+	data.relativeBand.delta.mean.push((delta_relative.leftEar + delta_relative.leftFront + delta_relative.rightFront + delta_relative.rightEar)/4);
+	data.relativeBand.theta.mean.push((theta_relative.leftEar + theta_relative.leftFront + theta_relative.rightFront + theta_relative.rightEar)/4);
+	data.relativeBand.alpha.mean.push((alpha_relative.leftEar + alpha_relative.leftFront + alpha_relative.rightFront + alpha_relative.rightEar)/4);
+	data.relativeBand.beta.mean.push((beta_relative.leftEar +beta_relative.leftFront + beta_relative.rightFront + beta_relative.rightEar)/4);
+	data.relativeBand.gamma.mean.push((gamma_relative.leftEar +gamma_relative.leftFront + gamma_relative.rightFront + gamma_relative.rightEar)/4);
 
 
 	shiftArrays([data.relativeBand.delta.mean, data.relativeBand.theta.mean, data.relativeBand.alpha.mean, data.relativeBand.beta.mean, data.relativeBand.gamma.mean], maxN);

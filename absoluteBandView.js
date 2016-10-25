@@ -21,7 +21,11 @@ function absoluteBandView(model, title, description) {
 
 		my.renderCommon();
 
-		var areaData = [model.absoluteBand.delta.leftFront,data.absoluteBand.theta.leftFront,data.absoluteBand.alpha.leftFront,data.absoluteBand.beta.leftFront,data.absoluteBand.gamma.leftFront];
+
+		console.log(model.absoluteBand.delta);
+		//var areaData = [model.absoluteBand.delta.leftFront,data.absoluteBand.theta.leftFront,data.absoluteBand.alpha.leftFront,data.absoluteBand.beta.leftFront,data.absoluteBand.gamma.leftFront];
+		var areaData = [model.absoluteBand.delta.mean,data.absoluteBand.theta.mean,data.absoluteBand.alpha.mean,data.absoluteBand.beta.mean,data.absoluteBand.gamma.mean];
+			
 		var innerWidth = width - padding.left - padding.right;
 		var innerHeight = 90;
 		var gap = 10;
