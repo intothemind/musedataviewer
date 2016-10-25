@@ -25,7 +25,7 @@ function horseshoeView(model, idArr,title, description) {
 		//console.log('title: ' + my.getTitle());
 		//console.log('description: ' + my.getDescription());
 
-		my.renderCommon();
+		//my.renderCommon();
 
 		var horseshoe = select('#horseshoe');
 		horseshoe.style('margin-top','100px');

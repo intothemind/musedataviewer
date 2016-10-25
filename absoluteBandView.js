@@ -19,7 +19,7 @@ function absoluteBandView(model, idArr,title, description) {
 		//console.log('title: ' + my.getTitle());
 		//console.log('description: ' + my.getDescription());
 
-		my.renderCommon();
+		//my.renderCommon();
 
 
 		console.log(model.absoluteBand.delta);

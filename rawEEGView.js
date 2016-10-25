@@ -15,7 +15,7 @@ function rawEEGView(model, idArr,title, description) {
 		//console.log('title: ' + my.getTitle());
 		//console.log('description: ' + my.getDescription());
 
-		my.renderCommon();
+		//my.renderCommon();
 
 
 		var lineData = [model.rawEEG.leftEar, model.rawEEG.leftFront, model.rawEEG.rightFront, model.rawEEG.rightEar];

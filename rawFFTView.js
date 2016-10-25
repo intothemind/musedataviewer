@@ -35,7 +35,7 @@ function rawFFTView(model, idArr,title, description) {
 		//console.log('title: ' + my.getTitle());
 		//console.log('description: ' + my.getDescription());
 
-		my.renderCommon();
+		//my.renderCommon();
 
 		//var barData = data.rawFFT.leftEar;
 		var barData = [data.rawFFT.leftEar,data.rawFFT.leftFront,data.rawFFT.rightFront,data.rawFFT.rightEar];

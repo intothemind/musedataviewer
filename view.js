@@ -2,6 +2,7 @@ function view(model, idArr,title, description){
 
 	var model = model;
 	var title = title;
+	var linkedTitle = '<a target="_blank" href=\'' + muselinks[title] + '\'>' + title + '</a>';
 	var ids = idArr;
 	var idString = '<code>' + idArr.join('<br/>') + '</code>';
 	var description = description;
@@ -18,6 +19,10 @@ function view(model, idArr,title, description){
 	var gap = 50;
 
 	var my = {};
+
+	my.init = function(){
+		my.renderCommon();
+	}
 
 	my.getTitle = function(){
 		return title;
@@ -36,7 +41,7 @@ function view(model, idArr,title, description){
 		//text(title, padding.left,padding.top);
 		//textSize(h2);
 		//text(description,padding.left,padding.top+gap);
-		select('#title').html(title);
+		select('#title').html(linkedTitle);
 		select('#description').html(description);
 		select('#ids').html(idString);
 	}

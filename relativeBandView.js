@@ -19,7 +19,7 @@ function relativeBandView(model, idArr,title, description) {
 		//console.log('title: ' + my.getTitle());
 		//console.log('description: ' + my.getDescription());
 
-		my.renderCommon();
+		//my.renderCommon();
 
 		//var areaData = [model.relativeBand.delta.leftFront,data.relativeBand.theta.leftFront,data.relativeBand.alpha.leftFront,data.relativeBand.beta.leftFront,data.relativeBand.gamma.leftFront];
 		var areaData = [model.relativeBand.delta.mean,data.relativeBand.theta.mean,data.relativeBand.alpha.mean,data.relativeBand.beta.mean,data.relativeBand.gamma.mean];
