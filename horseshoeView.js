@@ -27,8 +27,6 @@ function horseshoeView(model, title, description) {
 
 		my.renderCommon();
 
-
-
 		var horseshoe = select('#horseshoe');
 		horseshoe.style('margin-top','100px');
 		horseshoe.style('margin-left','100px');

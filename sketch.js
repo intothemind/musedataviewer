@@ -2,7 +2,7 @@ var muse;
 
 
 //initialize museData
-var dummy = true;
+var dummy = false;
 
 var done = false;
 
