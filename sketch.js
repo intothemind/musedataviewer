@@ -184,6 +184,7 @@ function setup() {
 	select('#eye_closed').hide();
 	select('#jaw_clench').hide();
 	select('#smile').hide();
+	select('#muse').hide();
 }
 
 function draw() {
@@ -414,6 +415,7 @@ function keyTyped() {
 	//ugly needs to be made better
 	if (viewIndex == 4) {
 		select('#horseshoe').show();
+		select('#muse').show();
 		select('canvas').hide();
 		select('#jaw_clench').hide();
 		select('#smile').hide();
@@ -421,6 +423,7 @@ function keyTyped() {
 		select('#eye_open').hide();
 	} else if (viewIndex == 5) {
 		select('#horseshoe').hide();
+		select('#muse').hide();
 		select('#eye_closed').hide();
 		select('#eye_open').show();
 		select('canvas').hide();
@@ -428,6 +431,7 @@ function keyTyped() {
 		select('#smile').hide();
 	}else if(viewIndex == 6){
 		select('#horseshoe').hide();
+		select('#muse').hide();
 		select('#eye_closed').hide();
 		select('#eye_open').hide();
 		select('canvas').hide();
@@ -436,6 +440,7 @@ function keyTyped() {
 	} 
 	else {
 		select('#horseshoe').hide();
+		select('#muse').hide();
 		select('#eye_closed').hide();
 		select('#eye_open').hide();
 		select('#jaw_clench').hide();

@@ -27,9 +27,14 @@ function horseshoeView(model, title, description) {
 
 		my.renderCommon();
 
+
+
 		var horseshoe = select('#horseshoe');
 		horseshoe.style('margin-top','100px');
 		horseshoe.style('margin-left','100px');
+
+		 select('#muse').position(600,180);
+		 select('#muse').style('width','500px');
 		//console.log(model.horseshoe);
 		//console.log(select('#leftFront'));
 		select('#leftFront').style('fill','red');
