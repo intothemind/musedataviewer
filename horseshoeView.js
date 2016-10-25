@@ -1,6 +1,6 @@
-function horseshoeView(model, title, description) {
+function horseshoeView(model, idArr,title, description) {
 
-	var my = view(model, title, description);
+	var my = view(model, idArr,title, description);
 
 	var padding = my.getPadding();
 	
@@ -31,7 +31,7 @@ function horseshoeView(model, title, description) {
 		horseshoe.style('margin-top','100px');
 		horseshoe.style('margin-left','100px');
 
-		 select('#muse').position(600,180);
+		 select('#muse').position(600,250);
 		 select('#muse').style('width','500px');
 		//console.log(model.horseshoe);
 		//console.log(select('#leftFront'));

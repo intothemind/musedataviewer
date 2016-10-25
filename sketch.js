@@ -2,7 +2,7 @@ var muse;
 
 
 //initialize museData
-var dummy = false;
+var dummy = true;
 
 var done = false;
 
@@ -165,14 +165,14 @@ function setup() {
 
 	muse.start();
 
-	var rawfftview = rawFFTView(data, 'Raw FFTs for Each Channel', 'FFT stands for Fast Fourier Transform. This computes the power spectral density of each frequency on each channel. Basically, it shows which frequencies make up a signal, and  “how much” of each frequency is present. These values are the basis for many of the subsequent DSP values in Muse Elements. Each path contains 129 decimal values with a range of roughly -40.0 to 20.0. Each array represents FFT coefficients (expressed as Power Spectral Density) for each channel, for a frequency range from 0hz-110Hz divided into 129 bins. We use a Hamming window of 256 samples(at 220Hz), then for the next FFT we slide the window 22 samples over(1/10th of a second). This gives a 90% overlap from one window to the next. These values are emitted at 10Hz.');
-	views.push(rawEEGView(data, 'Raw EEG', 'This is the raw EEG data for each channel on the headband as measured in microvolts.'));
+	var rawfftview = rawFFTView(data,['/muse/eeg'],'Raw FFTs for Each Channel', 'FFT stands for Fast Fourier Transform. This computes the power spectral density of each frequency on each channel. Basically, it shows which frequencies make up a signal, and  “how much” of each frequency is present. These values are the basis for many of the subsequent DSP values in Muse Elements. Each path contains 129 decimal values with a range of roughly -40.0 to 20.0. Each array represents FFT coefficients (expressed as Power Spectral Density) for each channel, for a frequency range from 0hz-110Hz divided into 129 bins. We use a Hamming window of 256 samples(at 220Hz), then for the next FFT we slide the window 22 samples over(1/10th of a second). This gives a 90% overlap from one window to the next. These values are emitted at 10Hz.');
+	views.push(rawEEGView(data,['/muse/elements/raw_fft0','/muse/elements/raw_fft1','/muse/elements/raw_fft2','/muse/elements/raw_fft3'] ,'Raw EEG', 'This is the raw EEG data for each channel on the headband as measured in microvolts.'));
 	views.push(rawfftview);
-	views.push(absoluteBandView(data, 'Absolute Band Powers', 'The absolute band power for a given frequency range (for instance, alpha, i.e. 9-13Hz) is the logarithm of the sum of the Power Spectral Density of the EEG data over that frequency range. They are provided for each of the four to six channels/electrode sites on Muse. Since it is a logarithm, some of the values will be negative (i.e. when the absolute power is less than 1) They are given on a log scale, units are Bels.'));
-	views.push(relativeBandView(data, 'Relative Band Powers', 'The relative band powers are calculated by dividing the absolute linear-scale power in one band over the sum of the absolute linear-scale powers in all bands. The linear-scale band power can be calculated from the log-scale band power thusly: linear-scale band power = 10^ (log-scale band power). Therefore, the relative band powers can be calculated as percentages of linear-scale band powers in each band. The resulting value is between 0 and 1. However, the value will never be 0 or 1. These values are emitted at 10Hz.'));
-	views.push(horseshoeView(data, 'Headband Status / Horseshoe', 'Status indicator for each channel (think of the Muse status indicator that looks like a horseshoe). 1 = good, 2 = ok, >=3 bad'));
-	views.push(blinkView(data, 'Muscle Movement / Blinks', 'These are emitted at 10Hz. A boolean value, 1 represents a blink was detected.'));
-	views.push(jawView(data, 'Muscle Movement / Jaw Clenches', 'A boolean value, 1 represents a jaw clench was detected.'));
+	views.push(absoluteBandView(data, ['/muse/elements/delta_absolute','/muse/elements/theta_absolute','/muse/elements/alpha_absolute','/muse/elements/beta_absolute','/muse/elements/gamma_absolute'],'Absolute Band Powers', 'The absolute band power for a given frequency range (for instance, alpha, i.e. 9-13Hz) is the logarithm of the sum of the Power Spectral Density of the EEG data over that frequency range. They are provided for each of the four to six channels/electrode sites on Muse. Since it is a logarithm, some of the values will be negative (i.e. when the absolute power is less than 1) They are given on a log scale, units are Bels.'));
+	views.push(relativeBandView(data, ['/muse/elements/delta_relative','/muse/elements/theta_relative','/muse/elements/alpha_relative','/muse/elements/beta_relative','/muse/elements/gamma_relative'],'Relative Band Powers', 'The relative band powers are calculated by dividing the absolute linear-scale power in one band over the sum of the absolute linear-scale powers in all bands. The linear-scale band power can be calculated from the log-scale band power thusly: linear-scale band power = 10^ (log-scale band power). Therefore, the relative band powers can be calculated as percentages of linear-scale band powers in each band. The resulting value is between 0 and 1. However, the value will never be 0 or 1. These values are emitted at 10Hz.'));
+	views.push(horseshoeView(data, ['/muse/elements/horseshoe','/muse/elements/touching_forehead'],'Headband Status / Horseshoe', 'Status indicator for each channel (think of the Muse status indicator that looks like a horseshoe). 1 = good, 2 = ok, >=3 bad'));
+	views.push(blinkView(data, ['/muse/elements/blink'],'Muscle Movement / Blinks', 'These are emitted at 10Hz. A boolean value, 1 represents a blink was detected.'));
+	views.push(jawView(data, ['/muse/elements/jaw_clench'],'Muscle Movement / Jaw Clenches', 'A boolean value, 1 represents a jaw clench was detected.'));
 
 
 	//set the font

@@ -1,7 +1,9 @@
-function view(model, title, description){
+function view(model, idArr,title, description){
 
 	var model = model;
 	var title = title;
+	var ids = idArr;
+	var idString = '<code>' + idArr.join('<br/>') + '</code>';
 	var description = description;
 	var padding = {
 		left: 0,
@@ -36,6 +38,7 @@ function view(model, title, description){
 		//text(description,padding.left,padding.top+gap);
 		select('#title').html(title);
 		select('#description').html(description);
+		select('#ids').html(idString);
 	}
 
 	my.getPadding = function(){

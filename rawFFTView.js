@@ -1,6 +1,6 @@
-function rawFFTView(model, title, description) {
+function rawFFTView(model, idArr,title, description) {
 
-	var my = view(model, title, description);
+	var my = view(model, idArr,title, description);
 	var padding = my.getPadding();
 
 	var dBDomain = [-40.0, 20.0];

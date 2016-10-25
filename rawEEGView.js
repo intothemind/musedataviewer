@@ -1,6 +1,6 @@
-function rawEEGView(model, title, description) {
+function rawEEGView(model, idArr,title, description) {
 
-	var my = view(model, title, description);
+	var my = view(model, idArr,title, description);
 
 	var padding = my.getPadding();
 	//0.0 - 1682.815
