@@ -58,7 +58,7 @@ function rawFFTView(model, idArr,title, description) {
 		barData.forEach(function(d,i){
 			push();
 			translate(0,i*(innerHeight+gap));
-			console.log('barData.length',barData[i]);
+			//console.log('barData.length',barData[i]);
 			fftBarChart(barData[i],dBDomain,innerWidth,innerHeight,colors);
 			pop();
 		});

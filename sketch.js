@@ -2,7 +2,7 @@ var muse;
 
 
 //initialize museData
-var dummy = false;
+var dummy = true;
 
 var done = false;
 
@@ -141,7 +141,7 @@ function setup() {
 	//data connection to muse with sampling rate of muse
 	if (dummy) {
 		console.log('using dummy data');
-		muse = museData().dummyData(1 / 100);
+		muse = museData().dummyData();
 	} else {
 		var museAddress = 'http://127.0.0.1:8081';
 		console.log('trying to connect to muse on ' + museAddress);
@@ -418,12 +418,15 @@ function updateData() {
 }
 
 function keyTyped() {
-	if (key == 'q') {
+
+	console.log('keyCode',keyCode,LEFT_ARROW);
+
+	if (key == 'q' || keyCode == LEFT_ARROW) {
 		viewIndex = constrain(viewIndex - 1, 0, views.length - 1);
 		currentView = views[viewIndex];
 		currentView.init();
 		console.log('viewIndex: ', viewIndex, views.length);
-	} else if (key == 'w') {
+	} else if (key == 'w' || keyCode == RIGHT_ARROW) {
 		viewIndex = constrain(viewIndex + 1, 0, views.length - 1);
 		currentView = views[viewIndex];
 		currentView.init();
