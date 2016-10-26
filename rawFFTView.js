@@ -3,7 +3,8 @@ function rawFFTView(model, idArr,title, description) {
 	var my = view(model, idArr,title, description);
 	var padding = my.getPadding();
 
-	var dBDomain = [-40.0, 20.0];
+	//var dBDomain = [-40.0, 20.0];
+	var dBDomain = [-40.0, 40.0];
 
 	var no_freq = 'Low';
 	var delta_absolute = 'Delta';
@@ -38,10 +39,11 @@ function rawFFTView(model, idArr,title, description) {
 		//my.renderCommon();
 
 		//var barData = data.rawFFT.leftEar;
-		var barData = [data.rawFFT.leftEar,data.rawFFT.leftFront,data.rawFFT.rightFront,data.rawFFT.rightEar];
+		//var barData = [data.rawFFT.leftEar,data.rawFFT.leftFront,data.rawFFT.rightFront,data.rawFFT.rightEar];
+		var barData = [data.rawFFT.leftEar];
 		//console.log(barData);
 		var innerWidth = width - padding.left - padding.right;
-		var innerHeight = 100;
+		var innerHeight = 400;
 		var gap = 10;
 		var colors = data.rawFFT.leftEar.map(function(d,i){
 			return getColor(i);
@@ -56,15 +58,50 @@ function rawFFTView(model, idArr,title, description) {
 		barData.forEach(function(d,i){
 			push();
 			translate(0,i*(innerHeight+gap));
+			console.log('barData.length',barData[i]);
 			fftBarChart(barData[i],dBDomain,innerWidth,innerHeight,colors);
 			pop();
 		});
+
+		//build a xaxis
+				/*
+		Name	Frequency Range			
+		low_freqs	2.5-6.1Hz			
+		delta_absolute	1-4Hz			
+		theta_absolute	4-8Hz			
+		alpha_absolute	7.5-13Hz			
+		beta_absolute	13-30Hz			
+		gamma_absolute	30-44Hz
+		*/
+		var ticks = [1,4,8,13,30,44,50,60,70,80,90,100,110];
+		push();
+		translate(0,innerHeight+10);
+		stroke(100);
+		strokeWeight(1);
+		line(0,0,innerWidth,0);
+		ticks.forEach(function(t,i){
+			var tx = map(t,0,110,0,innerWidth);
+			stroke(100);
+			line(tx,0,tx,5);
+			noStroke();
+			fill(0);
+			textAlign(CENTER,TOP);
+			if(i==0){
+				textAlign(LEFT,TOP);
+			}
+			if(i==ticks.length-1){
+				textAlign(RIGHT,TOP);
+			}
+			text(t,tx,5);
+		});
+		pop();
 
 		var colWidth = 100;
 		var r = 15;
 		var txtSze = 16;
 		textSize(txtSze);
-		translate(10,barData.length*(innerHeight+gap) +30);
+		translate(10,barData.length*(innerHeight+gap) +60);
+
 		frequencies.forEach(function(f,i){
 			//console.log(f,i);
 			push();
@@ -102,7 +139,7 @@ function rawFFTView(model, idArr,title, description) {
 			return no_freq;
 		} else if (freq < 4) {
 			return delta_absolute;
-		} else if (freq < 7.5) {
+		} else if (freq < 8) {
 			return theta_absolute;
 		} else if (freq < 13) {
 			return alpha_absolute;
